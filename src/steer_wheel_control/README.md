@@ -65,4 +65,4 @@ omega_i = s_i / r * direction_i
 
 - 直线行驶轮胎打滑约 2~3%。
 - 原地自转时轮速比指令低约 10%，车身角速度正常。
-- `/odom` 由同分支的 `steer_wheel_odometry` 发布。
+- `/odom` 由 `steer_wheel_odometry` 发布。
