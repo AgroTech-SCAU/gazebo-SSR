@@ -13,13 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
+r"""
 Bring up only the sweet-pepper greenhouse scene in Gazebo Classic 11.
 
 This launch does not spawn a robot. Any ROS 2 chassis can use the world:
 
-    ros2 launch <chassis_pkg> <chassis_launch.py> \\
-      world:=$(ros2 pkg prefix pepper_greenhouse)/share/pepper_greenhouse/worlds/pepper_greenhouse.world
+    PKG=$(ros2 pkg prefix pepper_greenhouse)/share/pepper_greenhouse
+    WORLD=$PKG/worlds/pepper_greenhouse.world
+    ros2 launch <chassis_pkg> <chassis_launch.py> world:=$WORLD
 
 or be spawned into the running scene with gazebo_ros/spawn_entity.py.
 
