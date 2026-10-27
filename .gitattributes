@@ -1,0 +1,11 @@
+# 统一文本换行，避免 Windows 下脚本出现 CRLF
+* text=auto eol=lf
+
+# 二进制资源
+*.stl binary
+*.STL binary
+*.dae binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary

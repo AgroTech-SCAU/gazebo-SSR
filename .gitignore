@@ -1,0 +1,22 @@
+# colcon / ROS 2 生成物
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+
+# 开发期过程性文件（不入库）
+/photos/
+/scripts/
+CLAUDE.*
+src/ackermann_chassis/
