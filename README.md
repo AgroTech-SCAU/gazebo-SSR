@@ -1,35 +1,44 @@
-# gazebo-SSR
+# 甜椒大棚场景
 
-Gazebo Classic 11 仿真资源库。资源按分支存放，`main` 只保留索引。
+`pepper_greenhouse`：100×100 m Gazebo Classic 11 甜椒大棚场景包。
+只启动 Gazebo 和 world，不生成机器人。
 
-## 分支
-
-| 分支 | 内容 |
-| --- | --- |
-| `sim/sweet-pepper-greenhouse` | 100×100 m 甜椒大棚场景包 |
-| `sim/transfer-robot-chassis` | 转运机器人 4WIS 舵轮底盘 |
-
-## 使用
+## 编译运行
 
 ```bash
-git clone <仓库 URL> gazebo-SSR
-cd gazebo-SSR
-git switch sim/sweet-pepper-greenhouse   # 或 sim/transfer-robot-chassis
-colcon build --symlink-install
+cd <仓库根目录>
+colcon build --symlink-install --packages-select pepper_greenhouse
 source install/setup.bash
+
+# 布局档
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py gui:=false
+
+# 视觉档
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py profile:=visual gui:=true
 ```
 
-运行方式见切换后分支的 README。
+启动参数：
 
-## 环境
+| 参数 | 默认 | 说明 |
+| --- | --- | --- |
+| `profile` | `layout` | `layout` 或 `visual` |
+| `gui` | `true` | 启动 gzclient |
+| `verbose` | `false` | gzserver 详细输出 |
+| `pause` | `false` | 启动后暂停 |
 
-- Ubuntu 22.04
-- ROS 2 Humble
-- Gazebo Classic 11
-- colcon
+## 场景内容
 
-## 维护
+- 100×100 m，30 行/侧，行距 1.6 m，轨距 0.6694 m，420 根立柱。
+- `layout` 约 14.6 万三角形；`visual` 约 30 万三角形。
+- 物理：1 ms 步长、1000 Hz、ODE quick 50 iters。
+- 巡检相机：`/greenhouse/aisle_camera/image_raw`、`/greenhouse/bed_camera/image_raw`。
+- 世界文件：`src/pepper_greenhouse/worlds/pepper_greenhouse.world`。
+- 详细说明：`src/pepper_greenhouse/README.md`。
 
-协作流程见 [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md)。
+![中央通道](src/pepper_greenhouse/docs/aisle_camera.png)
 
-- 项目负责人：`@funfun-run`
+## 限制
+
+- 不生成机器人、控制器或里程计；机器人由你的 launch 生成。
+- 只有两台固定巡检相机。
+- `model://` 需要先 `source install/setup.bash`。
