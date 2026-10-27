@@ -11,14 +11,14 @@
 ## 已完成
 
 - [x] 建立 `main` 分支：仓库介绍、资源索引、环境与运行说明
-- [x] 建立 `sim/greenhouse` 分支：100×100 m 甜椒大棚场景 + 所依赖的 4WIS 底盘三包
-- [x] 建立 `sim/steer-wheel-chassis` 分支：4WIS 舵轮底盘模型、控制与里程计
+- [x] 建立 `sim/sweet-pepper-greenhouse` 分支：100×100 m 甜椒大棚场景 + 所依赖的 4WIS 底盘三包
+- [x] 建立 `sim/transfer-robot-chassis` 分支：4WIS 舵轮底盘模型、控制与里程计
 - [x] 纳入模板的 `.github` 协作文件、Issue / PR 模板与 `main` 保护规则
 - [x] 排除过程性文件：`build/`、`install/`、`log/`、`__pycache__`、原始实拍图、调试脚本
 
 ## 下一步
 
-- [ ] 在 GitHub 创建远程仓库，推送 `main`、`sim/greenhouse`、`sim/steer-wheel-chassis`
+- [ ] 在 GitHub 创建远程仓库，推送 `main`、`sim/sweet-pepper-greenhouse`、`sim/transfer-robot-chassis`
 - [ ] 导入 `.github/rulesets/main-protection.json` 保护 `main`
 - [ ] 在干净环境（Ubuntu 22.04 + ROS 2 Humble + Gazebo 11）完整验证：
   clone → switch → rosdep → colcon build → launch
