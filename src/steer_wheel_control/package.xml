@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>steer_wheel_control</name>
+  <version>0.1.0</version>
+  <description>
+    四轮独立转向 (4WIS) 底盘控制：仿真用的 MCU 替身节点，
+    把 /cmd_vel (vx, vy, wz) 解算成 4 个转向角 + 4 个轮速。
+  </description>
+  <!-- TODO: 换成你自己的名字和邮箱 -->
+  <maintainer email="funfun@example.com">funfun</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <!-- sim.launch.py 会 include steer_wheel_chassis 包的 gazebo launch，并启动描述依赖 -->
+  <exec_depend>steer_wheel_chassis</exec_depend>
+  <!-- sim.launch.py 默认启动轮式里程计 -->
+  <exec_depend>steer_wheel_odometry</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

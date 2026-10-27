@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  steer_wheel_chassis.gazebo.xacro —— Gazebo Classic 11 物理属性与插件
+
+  接触参数说明（TurtleBot3 / open_manipulator 同款经典型号，Gazebo 11 上验证稳定）：
+      kp / kd      接触刚度 / 阻尼（ODE soft constraint）
+      minDepth     允许的最小穿透深度
+      maxVel       接触修正速度上限，太大容易把车轮弹起来
+      mu1 / mu2    摩擦系数（给 fdir1 时分别为 fdir1 方向与其垂直方向）
+
+  摩擦取值理由：
+    车轮  mu = 1.0  —— 橡胶对地板的真实量级。四轮独立转向原地转向时车轮必须能
+                       侧向擦地滑动，若用 TurtleBot3 那种 mu=10000（近似无限摩擦），
+                       转向关节会在原地拧死并抖动。
+    车体/转向节 mu = 0.1 ~ 0.2 —— 这些部位不该抓地，低摩擦可避免底盘被地面蹭住。
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ============ 模型级属性 ============ -->
+  <gazebo>
+    <!-- 关闭自碰撞：转向节/车轮的简化碰撞体会互相重叠，不开自碰撞才稳定 -->
+    <self_collide>false</self_collide>
+    <!-- 关闭自动休眠：被控关节的模型休眠后控制器会“推不动” -->
+    <allow_auto_disable>false</allow_auto_disable>
+  </gazebo>
+
+  <!-- ============ 车体 ============ -->
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.002</minDepth>
+    <maxVel>0.1</maxVel>
+  </gazebo>
+
+  <!-- ============ 转向节 ============ -->
+  <xacro:macro name="leg_surface" params="link">
+    <gazebo reference="${link}">
+      <material>Gazebo/DarkGrey</material>
+      <mu1>0.1</mu1>
+      <mu2>0.1</mu2>
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <minDepth>0.002</minDepth>
+      <maxVel>0.1</maxVel>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:leg_surface link="Link_1"/>
+  <xacro:leg_surface link="Link_2"/>
+  <xacro:leg_surface link="Link_3"/>
+  <xacro:leg_surface link="Link_4"/>
+
+  <!-- ============ 车轮 ============ -->
+  <!--
+    四个车轮的 link 系都是绕 z 旋转 90° 后建立的（轮轴 = local z），
+    实测 local -y 方向 = 车体 +x 方向（前进方向），四个轮一致。
+    若要改成各向异性摩擦（纵向抓地 / 侧向滑动），可打开 fdir1：
+        <fdir1>0 -1 0</fdir1>
+    并把 mu1 设为 1.0（纵向）、mu2 设为 0.2（侧向）。
+  -->
+  <xacro:macro name="wheel_surface" params="link">
+    <gazebo reference="${link}">
+      <material>Gazebo/FlatBlack</material>
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+      <kp>1000000.0</kp>
+      <kd>10.0</kd>
+      <minDepth>0.001</minDepth>
+      <maxVel>0.1</maxVel>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:wheel_surface link="Link_5"/>
+  <xacro:wheel_surface link="Link_6"/>
+  <xacro:wheel_surface link="Link_7"/>
+  <xacro:wheel_surface link="Link_8"/>
+
+  <!-- ============ ros2_control 硬件插件 ============ -->
+  <!--
+    libgazebo_ros2_control.so 会从 robot_state_publisher 节点读取 robot_description
+    参数中的 <ros2_control> 块，所以必须同时运行 robot_state_publisher。
+  -->
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>${controllers_file}</parameters>
+    </plugin>
+  </gazebo>
+
+</robot>

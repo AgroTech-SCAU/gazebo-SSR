@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Livox MID-360 安装（车体正前方，向下俯 13°）
+
+  Gazebo Classic ray 传感器 + libros2_livox.so 插件（来自 ros2_livox_simulation 包）。
+  发布：
+    /mid360               livox_ros_driver2/msg/CustomMsg
+    /mid360/pointcloud    sensor_msgs/msg/PointCloud2
+  扫描模式：ros2_livox_simulation/scan_mode/mid360.csv
+
+  注意：必须有 <always_on>true</always_on>，否则 Gazebo 不会以固定频率更新
+  这个传感器，插件回调不会触发（表现是话题存在但收不到数据）。
+
+  安装位姿由主 xacro 的 launch 参数控制：
+    mid360_x / mid360_y / mid360_z   安装位置（base_link 系，x 前、y 左、z 上）[m]
+    mid360_pitch                     俯仰角 [rad]；正值 = 车头方向向下俯
+                                     （ROS 中绕 +y 正转会把 +x 轴压向 -z）
+
+  传感器坐标系：+x 为出光前向，+y 左，+z 上；MID-360 的垂直视场
+  -7.22° ~ +55.22° 是相对传感器 +x 的，所以 13° 下俯后
+  相对车体水平面的视场约为 -20.2° ~ +42.2°。
+-->
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="mid360_mass" value="0.1"/>
+  <xacro:property name="mid360_size" value="0.1 0.06 0.06"/>
+  <xacro:property name="mid360_min_range" value="0.1"/>
+  <xacro:property name="mid360_max_range" value="200.0"/>
+  <xacro:property name="mid360_samples" value="10000"/>
+  <xacro:property name="mid360_resolution" value="0.002"/>
+  <xacro:property name="mid360_noise_stddev" value="0.01"/>
+
+  <link name="mid360">
+    <inertial>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+      <mass value="${mid360_mass}"/>
+      <inertia ixx="0.00011333" ixy="0" ixz="0"
+               iyy="0.00011333" iyz="0" izz="0.00006"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${mid360_size}"/>
+      </geometry>
+      <material name="robot_grey"/>
+    </visual>
+  </link>
+
+  <joint name="mid360_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="mid360"/>
+    <origin xyz="$(arg mid360_x) $(arg mid360_y) $(arg mid360_z)"
+            rpy="0 $(arg mid360_pitch) 0"/>
+  </joint>
+
+  <gazebo reference="mid360">
+    <sensor type="ray" name="mid360">
+      <pose>0 0 0 0 0 0</pose>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <plugin name="mid360_plugin" filename="libros2_livox.so">
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>100</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>${2*pi}</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>360</samples>
+              <resolution>1</resolution>
+              <min_angle>${-7.22/180*pi}</min_angle>
+              <max_angle>${55.22/180*pi}</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>${mid360_min_range}</min>
+            <max>${mid360_max_range}</max>
+            <resolution>${mid360_resolution}</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>${mid360_noise_stddev}</stddev>
+          </noise>
+        </ray>
+        <visualize>false</visualize>
+        <samples>${mid360_samples}</samples>
+        <downsample>1</downsample>
+        <csv_file_name>$(find ros2_livox_simulation)/scan_mode/mid360.csv</csv_file_name>
+        <topic>mid360</topic>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

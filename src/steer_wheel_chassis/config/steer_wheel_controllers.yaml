@@ -1,0 +1,50 @@
+# ros2_control 配置 —— 四轮独立转向 (4WIS)
+#
+# 8 个关节分成两组：
+#   steering_position_controller : 4 个转向关节 (left_front / right_front / left_behind / right_behind)
+#                                 命令接口 position，输入 std_msgs/Float64MultiArray [rad]
+#   wheel_velocity_controller    : 4 个车轮关节 (Joint_5 / Joint_6 / Joint_7 / Joint_8)
+#                                 命令接口 velocity，输入 std_msgs/Float64MultiArray [rad/s]
+#
+# 话题（注意是 /commands 复数，Humble 的 JointGroup*Controller 用的是复数名）：
+#   /steering_position_controller/commands   std_msgs/msg/Float64MultiArray
+#   /wheel_velocity_controller/commands      std_msgs/msg/Float64MultiArray
+#   /joint_states                            sensor_msgs/msg/JointState (由 joint_state_broadcaster 发布)
+#
+# 注意车轮转向符号：左侧车轮轴 = -y_base，右侧车轮轴 = +y_base，
+# 因此“前进”对应 左侧 +rad/s、右侧 -rad/s，详见 README。
+
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz，Gazebo 物理步长 1 ms，控制器 100 Hz
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    steering_position_controller:
+      type: position_controllers/JointGroupPositionController
+
+    wheel_velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+joint_state_broadcaster:
+  ros__parameters:
+    # 8 个关节都有 position/velocity 状态接口，默认全部广播到 /joint_states
+    publish_rate: 100.0
+
+steering_position_controller:
+  ros__parameters:
+    joints:
+      - left_front
+      - right_front
+      - left_behind
+      - right_behind
+
+wheel_velocity_controller:
+  ros__parameters:
+    joints:
+      - Joint_5
+      - Joint_6
+      - Joint_7
+      - Joint_8

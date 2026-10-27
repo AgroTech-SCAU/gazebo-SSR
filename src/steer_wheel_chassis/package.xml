@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>steer_wheel_chassis</name>
+  <version>0.1.0</version>
+  <description>
+    四轮独立转向 (4WIS) 机器人描述包：URDF/xacro 模型、惯性与碰撞属性、
+    Gazebo Classic 11 仿真配置、ros2_control 控制器配置与 launch 启动文件。
+  </description>
+  <!-- TODO: 换成你自己的名字和邮箱 -->
+  <maintainer email="funfun@example.com">funfun</maintainer>
+  <!-- 与源文件里的 Apache-2.0 头保持一致；若想改用 MIT，需要改这里 +
+       替换 launch/*.py 与 CMakeLists.txt 的 license 头 + 放一个 LICENSE 文件 -->
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- 模型描述与可视化 -->
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+
+  <!-- Gazebo Classic 11 -->
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_ros2_control</exec_depend>
+
+  <!-- Livox MID-360 仿真（libros2_livox.so + scan_mode/mid360.csv） -->
+  <exec_depend>ros2_livox_simulation</exec_depend>
+  <exec_depend>livox_ros_driver2</exec_depend>
+
+  <!-- ros2_control -->
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>position_controllers</exec_depend>
+  <exec_depend>velocity_controllers</exec_depend>
+
+  <!-- launch -->
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+
+  <!--
+    纯描述包（无 C/C++ 源码），所以不引 ament_lint_common：它会带上
+    cppcheck / cpplint / uncrustify，这些在没有 C++ 文件时会报 "No files found"
+    而让测试失败。只启用实际用得到的 linter。
+    注意要用 ament_cmake_* 版本（它们才注册 ctest 的 lint hook，而不是 ament_* 工具包）。
+  -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_cmake_copyright</test_depend>
+  <test_depend>ament_cmake_flake8</test_depend>
+  <test_depend>ament_cmake_pep257</test_depend>
+  <test_depend>ament_cmake_xmllint</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+    <!--
+      让 Gazebo 能解析 URDF 里 package://steer_wheel_chassis/meshes/*.stl 转换出的
+      model://robot/meshes/*.stl 路径：把 install 空间的 share/ 目录加进
+      GAZEBO_MODEL_PATH（gazebo_ros 的 GazeboRosPaths 会读取该 export）。
+    -->
+    <gazebo_ros gazebo_model_path="${prefix}/.."/>
+  </export>
+</package>

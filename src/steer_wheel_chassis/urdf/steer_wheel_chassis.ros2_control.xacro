@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  steer_wheel_chassis.ros2_control.xacro —— ros2_control 硬件接口声明（8 个关节）
+
+  转向关节 (left_front / right_front / left_behind / right_behind)
+      command : position   [rad]   → position_controllers/JointGroupPositionController
+      state   : position, velocity
+  车轮关节 (Joint_5 / Joint_6 / Joint_7 / Joint_8)
+      command : velocity   [rad/s] → velocity_controllers/JointGroupVelocityController
+      state   : position, velocity
+
+  硬件插件用 gazebo_ros2_control/GazeboSystem：由 Gazebo 里的
+  libgazebo_ros2_control.so 提供，仿真时不需要真实的 hardware_interface。
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <ros2_control name="RobotSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+
+    <!-- 转向关节：位置控制 -->
+    <joint name="left_front">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="right_front">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="left_behind">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="right_behind">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <!-- 车轮关节：速度控制 -->
+    <joint name="Joint_5">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_6">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_7">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_8">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+</robot>

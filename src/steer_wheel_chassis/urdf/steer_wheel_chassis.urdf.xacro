@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================================
+  steer_wheel_chassis.urdf.xacro —— 四轮独立转向 (4WIS) 机器人
+  ============================================================================
+  结构（沿用原始 robot.urdf 的命名与运动学，未做改动）：
+      base_footprint                地面参考系（空 link）
+        └─ base_joint (fixed) → base_link                     车体
+             ├─ left_front  (revolute) → Link_1 → Joint_5 (continuous) → Link_5  左前转向节 + 左前轮
+             ├─ right_front (revolute) → Link_2 → Joint_6 (continuous) → Link_6  右前
+             ├─ left_behind (revolute) → Link_3 → Joint_7 (continuous) → Link_7  左后
+             └─ right_behind(revolute) → Link_4 → Joint_8 (continuous) → Link_8  右后
+
+  相对原始 URDF 的变化：
+    1. 补齐 <inertial>：每个 link 的质量 + 惯性张量（由 STL 网格体积积分得到，
+       见下方单位质量惯性张量说明），Gazebo 没有惯性会直接报错/物体飞走。
+    2. 车轮关节 revolute(±3.14159) → continuous：轮子必须能连续旋转。
+    3. 网格路径 meshes/xxx.stl → package://steer_wheel_chassis/meshes/xxx.stl，RViz/Gazebo 才能找到。
+    4. 关节 effort/velocity 上限改为可调参数（原 10 N·m / 1 rad/s 太小：
+       轮半径 0.0935 m 时 1 rad/s 只有 9.4 cm/s，仿真里几乎不动）。
+    5. 增加 <collision> 简化体（原始 STL 碰撞体最大 15 MB，Gazebo 会卡死）：
+       use_mesh_collision:=true 可切回原始网格碰撞。
+    6. 增加 base_footprint 地面参考系（见下），修掉 KDL 对根 link 带惯性的警告。
+
+  几何实测数据（由 meshes/*.stl 计算）：
+      车体       0.86 × 0.86 × 0.346 m，网格体积 9.149e-3 m³
+      转向节     0.24 × 0.125 × 0.189 m，网格体积 7.3e-4 m³
+      车轮       半径 0.0935 m，胎面宽 0.0449 m，网格体积 2.11e-3 m³
+      四轮中心   均在 base_link 下方 z = -0.1594 m，y = ±0.335 m
+      → 轮胎着地时 base_link 离地 0.1594 + 0.0935 = 0.2529 m（= ground_offset）
+        即 base_footprint 落在地面时 base_link 在 0.2529 m，
+        launch 里 gazebo 的 -z 默认 0.02（留 2 cm 自由落体）
+  ============================================================================
+-->
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ======================= 可覆盖参数 ======================= -->
+  <xacro:arg name="use_mesh_collision" default="false"/>
+  <xacro:arg name="controllers_file" default="$(find steer_wheel_chassis)/config/steer_wheel_controllers.yaml"/>
+
+  <!-- Livox MID-360：默认装在车头 x=0.46, z=0.28，向下俯 13°（0.226893 rad） -->
+  <xacro:arg name="use_mid360" default="true"/>
+  <xacro:arg name="mid360_x" default="0.46"/>
+  <xacro:arg name="mid360_y" default="0.0"/>
+  <xacro:arg name="mid360_z" default="0.28"/>
+  <xacro:arg name="mid360_pitch" default="0.226893"/>
+
+  <xacro:property name="use_mesh_collision" value="$(arg use_mesh_collision)"/>
+  <xacro:property name="controllers_file" value="$(arg controllers_file)"/>
+  <xacro:property name="mesh_dir" value="package://steer_wheel_chassis/meshes"/>
+
+  <!-- ======================= 物理参数 ======================= -->
+  <!-- 质量 [kg]：按典型工业 AGV 取值（车体含内部电池/电控，转向节含减速器，车轮含轮毂电机） -->
+  <xacro:property name="base_mass" value="25.0"/>
+  <xacro:property name="leg_mass" value="2.0"/>
+  <xacro:property name="wheel_mass" value="4.0"/>
+  <!-- 整车 25 + 4×2 + 4×4 = 49 kg -->
+
+  <!-- 车轮实测尺寸 [m] -->
+  <xacro:property name="wheel_radius" value="0.0935"/>
+  <xacro:property name="wheel_width" value="0.0449"/>
+  <xacro:property name="wheel_tire_z" value="-0.0868"/>  <!-- 左前/左后轮胎面中心 (Link_5/7 系) -->
+
+  <!--
+    base_link 离地高度 = 四轮中心 z(-0.1594) 的相反数 + 轮半径 0.0935 = 0.2529 m
+    实测仿真中轮胎着地时 base_link 为 0.2518（接触面层穿透 1 mm），吻合。
+  -->
+  <xacro:property name="ground_offset" value="0.2529"/>
+
+  <!-- 关节驱动上限：转向 20 N·m / 3 rad/s，车轮 20 N·m / 20 rad/s (≈1.87 m/s) -->
+  <xacro:property name="steer_effort" value="20.0"/>
+  <xacro:property name="steer_velocity" value="3.0"/>
+  <xacro:property name="wheel_effort" value="20.0"/>
+  <xacro:property name="wheel_velocity" value="20.0"/>
+
+  <!-- ======================= 通用宏 ======================= -->
+
+  <!--
+    惯性块。
+    uixx/... = 单位质量惯性张量 [m²]，对 STL 三角网格做四面体积分、
+    再平移到质心后得到，因此 ${uixx * mass} 就是该质量下的真实惯性张量。
+    修改 mass 时惯性自动等比缩放，不用重新标定。
+  -->
+  <xacro:macro name="inertial" params="mass com uixx uixy uixz uiyy uiyz uizz">
+    <inertial>
+      <origin xyz="${com}" rpy="0 0 0"/>
+      <mass value="${mass}"/>
+      <inertia ixx="${uixx * mass}" ixy="${uixy * mass}" ixz="${uixz * mass}"
+               iyy="${uiyy * mass}" iyz="${uiyz * mass}" izz="${uizz * mass}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- 原始 STL 网格的 <geometry>（视觉与网格碰撞共用） -->
+  <xacro:macro name="mesh_geometry" params="name">
+    <geometry>
+      <mesh filename="${mesh_dir}/${name}.stl"/>
+    </geometry>
+  </xacro:macro>
+
+  <!-- 视觉：原始 STL 网格 -->
+  <xacro:macro name="mesh_visual" params="name">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <xacro:mesh_geometry name="${name}"/>
+      <material name="robot_grey"/>
+    </visual>
+  </xacro:macro>
+
+  <!--
+    碰撞体：默认用简化体（快、稳定）；
+    use_mesh_collision:=true 时改用原始 STL 三角网格（精确，但 15 MB 的 base_link
+    网格会让 Gazebo 物理计算非常慢）。
+  -->
+  <xacro:macro name="box_collision" params="name xyz size">
+    <collision>
+      <xacro:if value="${use_mesh_collision}">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <xacro:mesh_geometry name="${name}"/>
+      </xacro:if>
+      <xacro:unless value="${use_mesh_collision}">
+        <origin xyz="${xyz}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${size}"/>
+        </geometry>
+      </xacro:unless>
+    </collision>
+  </xacro:macro>
+
+  <xacro:macro name="cylinder_collision" params="name xyz radius length">
+    <collision>
+      <xacro:if value="${use_mesh_collision}">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <xacro:mesh_geometry name="${name}"/>
+      </xacro:if>
+      <xacro:unless value="${use_mesh_collision}">
+        <origin xyz="${xyz}" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}"/>
+        </geometry>
+      </xacro:unless>
+    </collision>
+  </xacro:macro>
+
+  <!-- 车轮碰撞体：轮胎圆柱（半径 = 滚动半径，长度 = 胎面宽），轴向 local z = 轮轴 -->
+  <xacro:macro name="tire_collision" params="name z">
+    <xacro:cylinder_collision name="${name}" xyz="0 0 ${z}"
+                              radius="${wheel_radius}" length="${wheel_width}"/>
+  </xacro:macro>
+
+  <!-- 转向关节（绕 z 轴旋转，限位 ±π） -->
+  <xacro:macro name="steer_joint" params="name parent child xyz">
+    <joint name="${name}" type="revolute">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz="${xyz}" rpy="0 0 -0.00000367"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-3.14159" upper="3.14159"
+             effort="${steer_effort}" velocity="${steer_velocity}"/>
+      <dynamics damping="0.2" friction="0.0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- 车轮关节（continuous，可无限旋转） -->
+  <xacro:macro name="wheel_joint" params="name parent child xyz rpy">
+    <joint name="${name}" type="continuous">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="${wheel_effort}" velocity="${wheel_velocity}"/>
+      <dynamics damping="0.05" friction="0.0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- ======================= 材质 ======================= -->
+  <material name="robot_grey">
+    <color rgba="0.65 0.68 0.72 1.0"/>
+  </material>
+
+  <!-- ======================= 地面参考系 ======================= -->
+  <!--
+    base_footprint：base_link 在地面的投影，Nav2 / robot_localization 的惯例基准
+    （odom -> base_footprint）。空 link（无惯性/几何，与 TurtleBot3 同样写法），
+    同时避免 KDL 报 “root link base_link has an inertia” 警告。
+  -->
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 ${ground_offset}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ======================= 车体 ======================= -->
+  <link name="base_link">
+    <xacro:mesh_visual name="base_link"/>
+    <!-- 网格包围盒：xy ±0.43，z ∈ [0, 0.346]；车体是框架壳体，用包围盒做包络 -->
+    <xacro:box_collision name="base_link" xyz="0 0 0.173" size="0.86 0.86 0.346"/>
+    <xacro:inertial mass="${base_mass}" com="0.0019 0.0055 0.1494"
+                    uixx="0.069040" uixy="0.000129" uixz="0.000131"
+                    uiyy="0.079193" uiyz="0.000725" uizz="0.116399"/>
+  </link>
+
+  <!-- ======================= 转向节 ======================= -->
+  <link name="Link_1">
+    <xacro:mesh_visual name="Link_1"/>
+    <xacro:box_collision name="Link_1" xyz="0.0239 0.0148 -0.0945" size="0.2400 0.1246 0.1889"/>
+    <xacro:inertial mass="${leg_mass}" com="0.0176 0.0310 -0.0703"
+                    uixx="0.003065" uixy="-0.000103" uixz="0.000441"
+                    uiyy="0.005054" uiyz="0.000548" uizz="0.003653"/>
+  </link>
+
+  <link name="Link_2">
+    <xacro:mesh_visual name="Link_2"/>
+    <xacro:box_collision name="Link_2" xyz="-0.0248 -0.0148 -0.0945" size="0.2399 0.1246 0.1889"/>
+    <xacro:inertial mass="${leg_mass}" com="-0.0178 -0.0310 -0.0715"
+                    uixx="0.003044" uixy="-0.000099" uixz="-0.000424"
+                    uiyy="0.005028" uiyz="-0.000531" uizz="0.003650"/>
+  </link>
+
+  <link name="Link_3">
+    <xacro:mesh_visual name="Link_3"/>
+    <xacro:box_collision name="Link_3" xyz="0.0248 0.0148 -0.0945" size="0.2399 0.1246 0.1889"/>
+    <xacro:inertial mass="${leg_mass}" com="0.0179 0.0310 -0.0715"
+                    uixx="0.003042" uixy="-0.000099" uixz="0.000424"
+                    uiyy="0.005022" uiyz="0.000529" uizz="0.003645"/>
+  </link>
+
+  <link name="Link_4">
+    <xacro:mesh_visual name="Link_4"/>
+    <xacro:box_collision name="Link_4" xyz="-0.0248 -0.0148 -0.0910" size="0.2399 0.1246 0.1747"/>
+    <xacro:inertial mass="${leg_mass}" com="-0.0178 -0.0309 -0.0692"
+                    uixx="0.002746" uixy="-0.000102" uixz="-0.000447"
+                    uiyy="0.004773" uiyz="-0.000549" uizz="0.003762"/>
+  </link>
+
+  <!-- ======================= 车轮 ======================= -->
+  <!-- 车轮网格在各自 link 系中沿 local z（= 轮轴方向）有偏心，质心/胎面位置逐个给出 -->
+  <link name="Link_5">
+    <xacro:mesh_visual name="Link_5"/>
+    <xacro:tire_collision name="Link_5" z="${wheel_tire_z}"/>
+    <xacro:inertial mass="${wheel_mass}" com="0 0 -0.0840"
+                    uixx="0.002200" uixy="0.0" uixz="0.0"
+                    uiyy="0.002201" uiyz="0.0" uizz="0.003437"/>
+  </link>
+
+  <link name="Link_6">
+    <xacro:mesh_visual name="Link_6"/>
+    <xacro:tire_collision name="Link_6" z="-0.0318"/>
+    <xacro:inertial mass="${wheel_mass}" com="0 0 -0.0290"
+                    uixx="0.002200" uixy="0.0" uixz="0.0"
+                    uiyy="0.002201" uiyz="0.0" uizz="0.003437"/>
+  </link>
+
+  <link name="Link_7">
+    <xacro:mesh_visual name="Link_7"/>
+    <xacro:tire_collision name="Link_7" z="${wheel_tire_z}"/>
+    <xacro:inertial mass="${wheel_mass}" com="0 0 -0.0840"
+                    uixx="0.002200" uixy="0.0" uixz="0.0"
+                    uiyy="0.002201" uiyz="0.0" uizz="0.003437"/>
+  </link>
+
+  <link name="Link_8">
+    <xacro:mesh_visual name="Link_8"/>
+    <xacro:tire_collision name="Link_8" z="-0.0299"/>
+    <xacro:inertial mass="${wheel_mass}" com="0 0 -0.0321"
+                    uixx="0.002209" uixy="0.0" uixz="0.0"
+                    uiyy="0.002193" uiyz="0.0" uizz="0.003403"/>
+  </link>
+
+  <!-- ======================= 关节（origins 与原始 URDF 完全一致） ======================= -->
+  <xacro:steer_joint name="left_front"   parent="base_link" child="Link_1" xyz="0.35500122 0.33499869 0.002"/>
+  <xacro:steer_joint name="right_front"  parent="base_link" child="Link_2" xyz="0.35499878 -0.33500131 0.002"/>
+  <xacro:steer_joint name="left_behind"  parent="base_link" child="Link_3" xyz="-0.35499878 0.33500131 0.002"/>
+  <xacro:steer_joint name="right_behind" parent="base_link" child="Link_4" xyz="-0.35500122 -0.33499869 0.0056183"/>
+
+  <xacro:wheel_joint name="Joint_5" parent="Link_1" child="Link_5"
+                     xyz="0.02232944 -0.08710001 -0.16140002" rpy="0 -1.57079633 1.57079633"/>
+  <xacro:wheel_joint name="Joint_6" parent="Link_2" child="Link_6"
+                     xyz="-0.02232944 0.03210001 -0.16140002" rpy="0 1.57079633 1.57079633"/>
+  <xacro:wheel_joint name="Joint_7" parent="Link_3" child="Link_7"
+                     xyz="0.02232944 -0.08710001 -0.16140002" rpy="0 -1.57079633 1.57079633"/>
+  <!--
+    注意 Joint_8 的 rpy 是 (0, -π/2, +π/2)（与左轮相同），而 Joint_6 是
+    (0, +π/2, +π/2)：右后轮的 joint 正方向指向车体 -y，即“正转 = 后退”。
+    因此 steer_wheel_control 的运动学里右后轮的方向系数是 -1（与左轮一致），
+    四个轮子的实际轮心仍在 y = ±0.3347，几何是对称的。
+  -->
+  <xacro:wheel_joint name="Joint_8" parent="Link_4" child="Link_8"
+                     xyz="-0.02232944 -0.02960001 -0.16501833" rpy="0 -1.57079633 1.57079633"/>
+
+  <!-- ======================= Gazebo / ros2_control ======================= -->
+  <xacro:include filename="steer_wheel_chassis.gazebo.xacro"/>
+  <xacro:include filename="steer_wheel_chassis.ros2_control.xacro"/>
+
+  <!-- 车头 MID-360（use_mid360:=false 可关闭） -->
+  <xacro:if value="$(arg use_mid360)">
+    <xacro:include filename="steer_wheel_chassis.mid360.xacro"/>
+  </xacro:if>
+
+</robot>
