@@ -24,7 +24,7 @@
 
 ```text
 main                              # 介绍、索引、协作规范（不含模型资源）
-├── sim/sweet-pepper-greenhouse   # 100×100 m 甜椒大棚场景（含所依赖的 4WIS 底盘包）
+├── sim/sweet-pepper-greenhouse   # 100×100 m 甜椒大棚场景（独立场景包）
 └── sim/transfer-robot-chassis    # 转运机器人 4WIS 舵轮底盘仿真
 ```
 
@@ -32,8 +32,8 @@ main                              # 介绍、索引、协作规范（不含模�
 
 - `main` 保持轻量：README、`docs/`、协作模板和少量预览图，克隆和浏览都很快。
 - 每个资源可以独立检出、独立编译、独立发布，互不干扰。
-- 资源之间共享的包（例如两个分支都有的 4WIS 底盘）由 Git 对象去重，
-  不会因为出现在多个分支里而重复占用仓库体积。
+- 资源分支只放该资源自己的包：大棚分支只有场景包，底盘分支只有底盘包。
+- 场景包**不依赖具体底盘**，可以通过 `world:=` 参数直接给其它底盘复用。
 - 资源分支是**长期分支**，不要合并回 `main`；文档更新从 `main` 合并到资源分支即可。
 
 ### 分支命名
@@ -41,7 +41,7 @@ main                              # 介绍、索引、协作规范（不含模�
 | 分支 | 含义 | 主要内容 |
 | --- | --- | --- |
 | `main` | 仓库索引 | 介绍、环境、编译、运行、协作规范 |
-| `sim/sweet-pepper-greenhouse` | 甜椒大棚场景 | `pepper_greenhouse` + 所依赖的 4WIS 底盘三包 |
+| `sim/sweet-pepper-greenhouse` | 甜椒大棚场景 | `pepper_greenhouse`（独立场景包） |
 | `sim/transfer-robot-chassis` | 转运机器人底盘 | `steer_wheel_chassis`、`steer_wheel_control`、`steer_wheel_odometry` |
 
 ## 2. 资源列表
@@ -49,14 +49,15 @@ main                              # 介绍、索引、协作规范（不含模�
 | 分支 | 资源 | 功能包 | 主要内容 |
 | --- | --- | --- | --- |
 | `main` | 仓库介绍与索引 | — | 环境、获取、编译、运行说明 |
-| `sim/sweet-pepper-greenhouse` | 100×100 m 甜椒大棚场景 | `pepper_greenhouse` + 4WIS 底盘三包 | 布局档/视觉档、实体轨道与沟槽、420 根立柱、两台巡检相机、与底盘联仿 |
+| `sim/sweet-pepper-greenhouse` | 100×100 m 甜椒大棚场景 | `pepper_greenhouse` | 布局档/视觉档、实体轨道与沟槽、420 根立柱、两台巡检相机、可配合任意底盘 |
 | `sim/transfer-robot-chassis` | 转运机器人 4WIS 舵轮底盘 | `steer_wheel_chassis`、`steer_wheel_control`、`steer_wheel_odometry` | URDF/xacro、ros2_control、`/cmd_vel` 运动学解算、轮式里程计、Livox MID-360 |
 
 说明：
 
-- `sim/sweet-pepper-greenhouse` 同时包含大棚场景和它依赖的三个底盘包，检出后可直接编译运行完整联仿。
-- `sim/transfer-robot-chassis` 只包含底盘相关包。
-- 两个分支中的底盘文件内容相同，Git 会共享对象存储，不会重复占用仓库体积。
+- `sim/sweet-pepper-greenhouse` 是**纯场景包**，不依赖任何底盘；单独启动只开 Gazebo 和 world。
+- `sim/transfer-robot-chassis` 只包含底盘相关包，不含大棚场景。
+- 两个资源分支互相独立；需要“大棚 + 底盘”联仿时，把两个包放进同一个工作空间，
+  通过底盘 launch 的 `world:=` 参数加载大棚 world（见 [5.9](#59-与任意底盘组合)）。
 - 阿克曼底盘 `ackermann_chassis` 暂不在收集范围内，未纳入任何分支。
 
 ## 3. 环境要求
@@ -125,23 +126,20 @@ source install/setup.bash
 
 ```bash
 # 布局档：场景轻、headless 下实时因子接近 1，适合 Nav2 / 路径验证
-ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py gui:=false
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py gui:=false
 
 # GUI 看布局
-ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py
 
 # 加密植株视觉档（截图用）
-ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py profile:=visual gui:=true
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py profile:=visual gui:=true
 
-# 同时打开 RViz2
-ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py profile:=visual rviz:=true
-
-# 没有安装 ros2_livox_simulation 时，关闭车头 MID-360
-ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py gui:=false use_mid360:=false
+# 暂停启动，方便先摆相机/机器人
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py pause:=true
 ```
 
-启动后机器人默认生成在 `x=0, y=0, z=0.02`，落到轨面 `z=0.010`。控制器和
-`/cmd_vel` 运动学节点由 `steer_wheel_control/sim.launch.py` 提供。
+这个 launch **只启动 Gazebo 和 world**，不生成机器人、不加载控制器。
+要与 4WIS 底盘或其它底盘联仿，见 [5.9 与任意底盘组合](#59-与任意底盘组合)。
 
 ![大棚中央通道](docs/images/greenhouse_aisle.png)
 
@@ -189,17 +187,20 @@ ros2 topic pub -r 20 /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.3}, angula
 
 ### 5.1 定位与设计取舍
 
-基于 8 张现场实拍图搭建的 100×100 m 室内甜椒大棚。设计取舍是**布局优先**：
+基于 8 张现场实拍图搭建的 100×100 m 室内甜椒大棚。**独立场景包**，
+不依赖任何底盘；任何机器人/底盘都可以通过 `world:=` 参数或 `spawn_entity`
+放进这个场景。设计取舍是**布局优先**：
 
 - 通道、沟槽、行距、轨道和棚体结构按实拍比例还原。
 - 植株用连续冠层带 + 稀疏低模八面体表示，不做逐株精细模型。
 - headless 下实时因子接近 1，可直接用于 Nav2 / 路径验证。
 - 场景内固定放置两台巡检相机，方便录制和检查布局。
+- 只包含 world、模型、相机和生成脚本；不生成机器人、不加载控制器。
 
 ### 5.2 尺寸基准
 
-照片里中央通道的两条钢轨是与底盘轨道接口配合的。底盘
-`steer_wheel_control.WHEEL_LAYOUT` 的轮心 `y=±0.33470 m`，因此：
+照片里中央通道的两条钢轨是与底盘轨道接口配合的。当前尺寸以仓库里的
+4WIS 底盘作为**参考底盘**：轮心 `y=±0.33470 m`，因此：
 
 ```text
 轨距 = 2 × 0.33470 = 0.6694 m
@@ -230,14 +231,15 @@ ros2 topic pub -r 20 /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.3}, angula
 床段划分：`22.5 + 2 + 43 + 2 + 22.5 = 92 m`。
 
 `scripts/layout.py` 是唯一尺寸来源，`Layout.validate()` 会断言轨距、轮轨间隙、
-行数、通道无柱等约束。改尺寸时先改 `config/greenhouse.yaml`，再重新生成。
+行数、通道无柱等约束。换成其它底盘时，先改 `config/greenhouse.yaml` 里的
+`chassis.wheel_y` / `wheel_width` / `wheel_radius`，再重新生成 world。
 
 ### 5.3 功能包与模型组成
 
 ```text
 src/pepper_greenhouse/
 ├── config/greenhouse.yaml          # 所有可调尺寸与密度
-├── launch/pepper_greenhouse_sim.launch.py
+├── launch/pepper_greenhouse_world.launch.py  # 独立场景 launch
 ├── models/
 │   ├── pepper_greenhouse_shell/    # 白框、玻璃、风扇、黄管、钢丝、地面
 │   ├── pepper_beds_mid/            # 43 m 床段
@@ -267,9 +269,11 @@ src/pepper_greenhouse/
 | --- | --- | --- |
 | `profile` | `layout` | `layout` 或 `visual` |
 | `gui` | `true` | 是否启动 gzclient |
-| `rviz` | `false` | 是否额外启动 RViz2 |
-| `x` / `y` / `yaw` | `0` | 机器人生成位置与朝向 |
-| `use_mid360` | `true` | 是否启用底盘车头 MID-360 |
+| `verbose` | `false` | gzserver 详细输出 |
+| `pause` | `false` | 启动后暂停仿真 |
+
+> 这个 launch 不生成机器人，所以没有 `x/y/yaw`、`use_mid360` 这类底盘参数。
+> 机器人生成与传感器由你使用的底盘 launch 负责。
 
 ### 5.6 巡检相机
 
@@ -325,9 +329,60 @@ source install/setup.bash
 生成物（world / model.sdf / model.config / STL）提交到源码树。
 `generate_world.py --check` 可以不写盘地比对生成物是否与配置一致。
 
-### 5.9 只预览场景
+### 5.9 与任意底盘组合
 
-不编译工作空间、只看场景：
+场景 launch 只负责 Gazebo 和 world，机器人由底盘包生成。常用三种方式。
+
+#### 方式 1：给底盘 launch 传 `world:=`（推荐）
+
+大多数底盘 launch 都允许指定 world。以本仓库的 4WIS 底盘为例：
+
+```bash
+# 需要 pepper_greenhouse 和底盘包在同一个工作空间里
+ros2 launch steer_wheel_control sim.launch.py \
+  world:=$(ros2 pkg prefix pepper_greenhouse)/share/pepper_greenhouse/worlds/pepper_greenhouse.world
+```
+
+`steer_wheel_control/sim.launch.py` 会把 `world` 透传给
+`steer_wheel_chassis/gazebo.launch.py`，机器人生成、控制器、运动学和里程计
+都照常启动。换成其它底盘时，把包名和 launch 名替换成你的底盘入口即可；
+如果它不支持 `world:=`，用方式 2。
+
+#### 方式 2：先起场景，再单独生成机器人
+
+```bash
+# 终端 1：只启动场景
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py gui:=false
+
+# 终端 2：用你的底盘 launch 只做 spawn，或直接调用 spawn_entity
+ros2 run gazebo_ros spawn_entity.py \
+  -file /path/to/robot.urdf -entity robot -x 0 -y 0 -z 0.02
+```
+
+相机、TF、控制器、传感器都由你的底盘节点负责。
+
+#### 方式 3：把两个资源分支放进同一个工作空间
+
+两个资源分支互相独立。需要组合时，用 `git worktree` 或直接复制：
+
+```bash
+# 在仓库旁边再检出一个底盘分支
+git worktree add ../gazebo-SSR-chassis sim/transfer-robot-chassis
+
+# 把底盘包复制到当前大棚工作空间
+cp -a ../gazebo-SSR-chassis/src/steer_wheel_chassis src/
+cp -a ../gazebo-SSR-chassis/src/steer_wheel_control src/
+cp -a ../gazebo-SSR-chassis/src/steer_wheel_odometry src/
+
+colcon build --symlink-install
+source install/setup.bash
+```
+
+然后按方式 1 启动。
+
+### 5.10 手动预览场景
+
+不编译工作空间、只看画面：
 
 ```bash
 source /opt/ros/humble/setup.bash
@@ -340,25 +395,29 @@ GAZEBO_MODEL_PATH=$PWD/src/pepper_greenhouse/models \
 > 可以忽略插件报错。完整的编译、运行、重新生成流程见分支内的
 > `src/pepper_greenhouse/README.md`。
 
-### 5.10 已知限制
+### 5.11 已知限制
 
-- **场景本身不含机器人**：单独运行 world 时没有里程计；联仿时由
-  `steer_wheel_odometry` 发布 `/odom` 和 `odom → base_footprint`。
-- **只有两台固定巡检相机**：车头 MID-360 由底盘包提供，照片里的其他相机/机械臂
-  不在本场景范围内。
+- **场景本身不含机器人**：这是刻意设计。单独启动时没有里程计、控制器或雷达；
+  组合后由你使用的底盘包提供。4WIS 组合时由 `steer_wheel_odometry` 发布
+  `/odom` 和 `odom → base_footprint`。
+- **只有两台固定巡检相机**：照片里的其它相机/机械臂不在本场景范围内；
+  车头 MID-360 由底盘包提供。
 - **柱网与行距不整除**：柱网 5 m、行距 1.6 m，部分立柱会落在 1.25 m 行间走道；
   中央通道、横向通道、端部掉头区已断言无柱。立柱有简化碰撞代理，但视觉网格与
   碰撞代理不完全一致。
-- **轨道高度可调**：当前轨道 6 mm 高、5 cm 宽。最初用 1 cm 高时，49 kg 的底盘
-  可以压上去，但从地面横移回来时爬不上 1 cm 台阶；降到 6 mm 后重测。
+- **轨道高度可调**：当前轨道 6 mm 高、5 cm 宽。最初用 1 cm 高时，49 kg 的
+  参考底盘可以压上去，但从地面横移回来时爬不上 1 cm 台阶；降到 6 mm 后重测。
   如果现场轨道更高，把 `config/greenhouse.yaml` 的 `rails.height` 调回去，
   并给轨道加 45° 倒角碰撞，或接受“只能从轨面开始”。
+- **换成其它底盘要改尺寸锚点**：`chassis.wheel_y` / `wheel_width` / `wheel_radius`
+  是按 4WIS 参考底盘写的；轨距、轮轨间隙和轨道宽度都由此派生。换底盘后改这三个值，
+  重新生成 world，再跑 `check_layout.py`。
 - **`model://` 依赖**：`package.xml` 通过 `gazebo_model_path="${prefix}/models"`
   导出模型路径，launch 前必须 `source install/setup.bash`。手动 `gzserver world`
   时要补 `GAZEBO_MODEL_PATH`。
-- **MID-360 性能**：默认 `mid360_samples=10000` 时，大棚 RTF 约 0.38；
-  40000 时只有 0.065。需要更流畅可以把 samples 降到 5000，或把
-  `<update_rate>` 从 10 Hz 降到 5 Hz。
+- **雷达性能**：场景本身不含雷达；如果底盘带 MID-360，默认 `mid360_samples=10000`
+  时大棚 RTF 约 0.38，40000 时只有 0.065。需要更流畅可以把 samples 降到 5000，
+  或把 `<update_rate>` 从 10 Hz 降到 5 Hz。
 
 ## 6. 资源详解：转运机器人底盘
 
@@ -376,6 +435,9 @@ GAZEBO_MODEL_PATH=$PWD/src/pepper_greenhouse/models \
 /cmd_vel (vx, vy, wz) ────────────┤
                                   └─ 仿真：steer_wheel_kinematics → 8 个关节命令
 ```
+
+底盘分支本身不含大棚场景。要在大棚里跑，把大棚 world 传给 `sim.launch.py` 的
+`world:=` 参数即可，组合方法见 [5.9](#59-与任意底盘组合)。
 
 ### 6.2 功能包职责
 
@@ -593,7 +655,7 @@ v_iy = vy + wz · x_i
 | --- | --- | --- |
 | `gui` | `true` | 启动 gzclient 图形界面 |
 | `rviz` | `false` | 额外启动 RViz2 |
-| `world` | `steer_wheel_chassis.world` | Gazebo world 文件 |
+| `world` | `steer_wheel_chassis.world` | Gazebo world 文件；可指向大棚 world（见 5.9） |
 | `x` / `y` / `yaw` | 0 | 生成位置与姿态 |
 | `use_mesh_collision` | `false` | 用原始 STL 网格作为碰撞体（很慢） |
 | `use_mid360` | `true` | 车头 Livox MID-360 |
@@ -675,9 +737,9 @@ gazebo-SSR/
 gazebo-SSR/
 └── src/
     ├── pepper_greenhouse/       # 仅 sim/sweet-pepper-greenhouse
-    ├── steer_wheel_chassis/     # 两个资源分支都有
-    ├── steer_wheel_control/     # 两个资源分支都有
-    └── steer_wheel_odometry/    # 两个资源分支都有
+    ├── steer_wheel_chassis/     # 仅 sim/transfer-robot-chassis
+    ├── steer_wheel_control/     # 仅 sim/transfer-robot-chassis
+    └── steer_wheel_odometry/    # 仅 sim/transfer-robot-chassis
 ```
 
 `build/`、`install/`、`log/`、`__pycache__/` 等生成物已在 `.gitignore` 中排除，不入库。
@@ -693,7 +755,8 @@ Issue → Branch → Commit → Push → Pull Request → 项目负责人 Merge
 - 不要直接在 `main` 开发或 Push。
 - 新增资源时，从 `main` 创建 `sim/<resource>` 长期分支，在 `src/` 下加入功能包。
 - 修改 `main` 文档后，把 `main` 合并进各资源分支，保持说明同步。
-- 资源分支之间不要互相合并整个历史；修改共享底盘包时用 cherry-pick 同步。
+- 资源分支彼此独立，不要在资源分支之间合并整个历史；需要组合时按
+  [5.9](#59-与任意底盘组合) 的方式放进同一个工作空间。
 - 完整流程见 [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md) 和
   [`docs/branches.md`](docs/branches.md)。
 
@@ -728,11 +791,10 @@ export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-11:$GAZEBO_RESOURCE_PATH
 ### 没有安装 `ros2_livox_simulation`
 
 MID-360 插件和 `scan_mode/mid360.csv` 由该系统包提供，它不在 rosdep 索引里。
-不需要雷达时，启动时加 `use_mid360:=false`：
+大棚场景本身不需要雷达包；底盘不需要雷达时，启动时加 `use_mid360:=false`：
 
 ```bash
 ros2 launch steer_wheel_control sim.launch.py use_mid360:=false
-ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py use_mid360:=false
 ```
 
 ### 没有 `/scan`，Nav2 怎么用
@@ -740,10 +802,11 @@ ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py use_mid360:=false
 底盘只提供 MID-360 点云 `/mid360/pointcloud`。Nav2 可以使用点云输入
 （`voxel_layer` / `obstacle_layer`），或者自行加 `pointcloud_to_laserscan`。
 
-### 大棚 + MID-360 仿真很慢
+### 在大棚里用 MID-360 时仿真很慢
 
 MID-360 插件按样本数逐条发射射线。默认 `mid360_samples=10000` 时大棚 RTF 约 0.38；
-可以降到 5000，或把 `<update_rate>` 从 10 Hz 降到 5 Hz。
+可以降到 5000，或把 `<update_rate>` 从 10 Hz 降到 5 Hz。只跑场景、不挂雷达时
+不受影响。
 
 ### `model://` 模型找不到
 
