@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>pepper_greenhouse</name>
+  <version>0.1.0</version>
+  <description>
+    100 x 100 m indoor sweet-pepper greenhouse Gazebo Classic 11 scene.
+    Chassis-agnostic: layout-first physical rails, grow gutters, structural
+    shell and sparse low-poly plants.  Any robot/chassis can use the world.
+  </description>
+  <maintainer email="funfun@example.com">funfun</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pil</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_cmake_flake8</test_depend>
+  <test_depend>ament_cmake_pep257</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+    <!-- Resolve model://pepper_greenhouse_shell/... from the installed models/. -->
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
+  </export>
+</package>

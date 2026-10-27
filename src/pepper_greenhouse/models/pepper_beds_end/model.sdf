@@ -1,0 +1,3044 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.6">
+  <model name="pepper_beds_end">
+    <static>true</static>
+    <link name="link">
+      <visual name="gutter_white">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/gutter_white.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.9200 0.9200 0.9000 1.0000</ambient>
+          <diffuse>0.9200 0.9200 0.9000 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="legs_grey">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/legs_grey.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.7200 0.7200 0.7200 1.0000</ambient>
+          <diffuse>0.7200 0.7200 0.7200 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="substrate_brown">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/substrate_brown.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2800 0.1800 0.1000 1.0000</ambient>
+          <diffuse>0.2800 0.1800 0.1000 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="drip_black">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/drip_black.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0600 0.0600 0.0600 1.0000</ambient>
+          <diffuse>0.0600 0.0600 0.0600 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="canopy_dark">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/canopy_dark.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.1400 0.4200 0.1400 1.0000</ambient>
+          <diffuse>0.1400 0.4200 0.1400 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="canopy_mid">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/canopy_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2200 0.5800 0.2000 1.0000</ambient>
+          <diffuse>0.2200 0.5800 0.2000 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="fruit_red">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/fruit_red.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8500 0.0800 0.0400 1.0000</ambient>
+          <diffuse>0.8500 0.0800 0.0400 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="fruit_green">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/fruit_green.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.4000 0.6500 0.1500 1.0000</ambient>
+          <diffuse>0.4000 0.6500 0.1500 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="strings_white">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/strings_white.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.9000 0.9000 0.8800 1.0000</ambient>
+          <diffuse>0.9000 0.9000 0.8800 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="cards_yellow">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/cards_yellow.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.9500 0.8500 0.1000 1.0000</ambient>
+          <diffuse>0.9500 0.8500 0.1000 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="cards_blue">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/cards_blue.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.1000 0.5500 0.8500 1.0000</ambient>
+          <diffuse>0.1000 0.5500 0.8500 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="markers_pink">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_beds_end/meshes/markers_pink.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.9000 0.2000 0.5500 1.0000</ambient>
+          <diffuse>0.9000 0.2000 0.5500 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <collision name="gutter_0">
+        <pose>0.000000 0.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_1">
+        <pose>0.000000 2.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_2">
+        <pose>0.000000 3.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_3">
+        <pose>0.000000 5.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_4">
+        <pose>0.000000 7.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_5">
+        <pose>0.000000 8.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_6">
+        <pose>0.000000 10.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_7">
+        <pose>0.000000 11.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_8">
+        <pose>0.000000 13.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_9">
+        <pose>0.000000 15.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_10">
+        <pose>0.000000 16.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_11">
+        <pose>0.000000 18.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_12">
+        <pose>0.000000 19.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_13">
+        <pose>0.000000 21.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_14">
+        <pose>0.000000 23.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_15">
+        <pose>0.000000 24.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_16">
+        <pose>0.000000 26.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_17">
+        <pose>0.000000 27.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_18">
+        <pose>0.000000 29.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_19">
+        <pose>0.000000 31.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_20">
+        <pose>0.000000 32.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_21">
+        <pose>0.000000 34.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_22">
+        <pose>0.000000 35.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_23">
+        <pose>0.000000 37.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_24">
+        <pose>0.000000 39.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_25">
+        <pose>0.000000 40.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_26">
+        <pose>0.000000 42.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_27">
+        <pose>0.000000 43.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_28">
+        <pose>0.000000 45.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_29">
+        <pose>0.000000 47.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_30">
+        <pose>0.000000 -0.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_31">
+        <pose>0.000000 -2.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_32">
+        <pose>0.000000 -3.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_33">
+        <pose>0.000000 -5.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_34">
+        <pose>0.000000 -7.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_35">
+        <pose>0.000000 -8.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_36">
+        <pose>0.000000 -10.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_37">
+        <pose>0.000000 -11.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_38">
+        <pose>0.000000 -13.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_39">
+        <pose>0.000000 -15.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_40">
+        <pose>0.000000 -16.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_41">
+        <pose>0.000000 -18.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_42">
+        <pose>0.000000 -19.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_43">
+        <pose>0.000000 -21.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_44">
+        <pose>0.000000 -23.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_45">
+        <pose>0.000000 -24.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_46">
+        <pose>0.000000 -26.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_47">
+        <pose>0.000000 -27.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_48">
+        <pose>0.000000 -29.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_49">
+        <pose>0.000000 -31.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_50">
+        <pose>0.000000 -32.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_51">
+        <pose>0.000000 -34.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_52">
+        <pose>0.000000 -35.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_53">
+        <pose>0.000000 -37.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_54">
+        <pose>0.000000 -39.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_55">
+        <pose>0.000000 -40.775000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_56">
+        <pose>0.000000 -42.375000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_57">
+        <pose>0.000000 -43.975000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_58">
+        <pose>0.000000 -45.575000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="gutter_59">
+        <pose>0.000000 -47.175000 0.175000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.350000 0.350000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_0">
+        <pose>0.000000 0.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_1">
+        <pose>0.000000 2.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_2">
+        <pose>0.000000 3.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_3">
+        <pose>0.000000 5.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_4">
+        <pose>0.000000 7.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_5">
+        <pose>0.000000 8.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_6">
+        <pose>0.000000 10.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_7">
+        <pose>0.000000 11.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_8">
+        <pose>0.000000 13.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_9">
+        <pose>0.000000 15.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_10">
+        <pose>0.000000 16.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_11">
+        <pose>0.000000 18.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_12">
+        <pose>0.000000 19.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_13">
+        <pose>0.000000 21.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_14">
+        <pose>0.000000 23.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_15">
+        <pose>0.000000 24.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_16">
+        <pose>0.000000 26.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_17">
+        <pose>0.000000 27.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_18">
+        <pose>0.000000 29.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_19">
+        <pose>0.000000 31.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_20">
+        <pose>0.000000 32.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_21">
+        <pose>0.000000 34.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_22">
+        <pose>0.000000 35.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_23">
+        <pose>0.000000 37.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_24">
+        <pose>0.000000 39.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_25">
+        <pose>0.000000 40.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_26">
+        <pose>0.000000 42.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_27">
+        <pose>0.000000 43.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_28">
+        <pose>0.000000 45.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_29">
+        <pose>0.000000 47.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_30">
+        <pose>0.000000 -0.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_31">
+        <pose>0.000000 -2.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_32">
+        <pose>0.000000 -3.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_33">
+        <pose>0.000000 -5.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_34">
+        <pose>0.000000 -7.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_35">
+        <pose>0.000000 -8.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_36">
+        <pose>0.000000 -10.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_37">
+        <pose>0.000000 -11.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_38">
+        <pose>0.000000 -13.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_39">
+        <pose>0.000000 -15.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_40">
+        <pose>0.000000 -16.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_41">
+        <pose>0.000000 -18.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_42">
+        <pose>0.000000 -19.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_43">
+        <pose>0.000000 -21.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_44">
+        <pose>0.000000 -23.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_45">
+        <pose>0.000000 -24.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_46">
+        <pose>0.000000 -26.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_47">
+        <pose>0.000000 -27.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_48">
+        <pose>0.000000 -29.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_49">
+        <pose>0.000000 -31.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_50">
+        <pose>0.000000 -32.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_51">
+        <pose>0.000000 -34.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_52">
+        <pose>0.000000 -35.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_53">
+        <pose>0.000000 -37.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_54">
+        <pose>0.000000 -39.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_55">
+        <pose>0.000000 -40.775000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_56">
+        <pose>0.000000 -42.375000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_57">
+        <pose>0.000000 -43.975000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_58">
+        <pose>0.000000 -45.575000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <collision name="canopy_59">
+        <pose>0.000000 -47.175000 0.425000 0.000000 0.000000 0.000000</pose>
+        <geometry>
+          <box>
+            <size>22.500000 0.300000 0.150000</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.6">
+  <model name="pepper_plants_dense">
+    <static>true</static>
+    <link name="link">
+      <visual name="canopy_dense">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_plants_dense/meshes/canopy_dense.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.1800 0.5000 0.1600 1.0000</ambient>
+          <diffuse>0.1800 0.5000 0.1600 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="fruit_red">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_plants_dense/meshes/fruit_red.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8500 0.0800 0.0400 1.0000</ambient>
+          <diffuse>0.8500 0.0800 0.0400 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+      <visual name="strings_white">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://pepper_plants_dense/meshes/strings_white.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.9000 0.9000 0.8800 1.0000</ambient>
+          <diffuse>0.9000 0.9000 0.8800 1.0000</diffuse>
+          <specular>0.1000 0.1000 0.1000 1.0000</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

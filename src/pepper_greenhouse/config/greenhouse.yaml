@@ -1,0 +1,64 @@
+# Pepper greenhouse layout parameters.
+#
+# All lengths are metres.  The rail gauge (2 * chassis.wheel_y) is the
+# dimension anchor taken from the 4WIS chassis: every other dimension below
+# is either measured from the photos or derived from the rail gauge in
+# scripts/layout.py.
+
+chassis:
+  wheel_y: 0.33470          # wheel centre |y| from steer_wheel_control.WHEEL_LAYOUT
+  wheel_width: 0.04490      # tyre width from the chassis URDF
+  wheel_radius: 0.09350     # rolling radius from the chassis URDF
+
+rails:
+  width: 0.050              # 5 cm steel strip, fully supports a 4.49 cm tyre
+  height: 0.006             # 6 mm above the concrete: low enough to climb
+  embed: 0.005              # sunk into the floor to avoid z-fighting
+  length: 94.0              # x in [-47, 47], through the cross aisles
+  x_min: -47.0
+
+greenhouse:
+  site_size: 100.0          # world / floor is exactly 100 x 100 m
+  wall_height: 4.50
+  wall_thickness: 0.10
+  eave_height: 4.50
+  ridge_height: 5.70
+  roof_bay: 5.00            # 20 bays across 100 m
+  column_size: 0.12
+  column_grid: 5.00
+  roof_slope_thickness: 0.02
+
+aisle:
+  clear_width: 1.20         # central aisle between gutter inner faces
+
+gutter:
+  width: 0.35
+  bottom: 0.15
+  top: 0.35
+  substrate_thickness: 0.02
+  leg_size: 0.04
+  leg_spacing: 2.50
+
+beds:
+  pitch: 1.60               # row centre to row centre
+  rows_per_side: 30
+  zone_length: 92.0         # x in [-46, 46]
+  cross_aisle_width: 2.00
+  cross_aisle_center: 22.50
+
+plants:
+  height: 0.50
+  spacing_layout: 3.20      # sparse profile (default)
+  spacing_visual: 0.80      # dense overlay profile
+  canopy_width: 0.30
+  canopy_height: 0.15
+  canopy_bottom: 0.35
+
+structure:
+  wire_height: 3.80
+  pipe_height: 2.50
+  pipe_radius: 0.02
+  pipe_offset: 0.25         # two pipes per walkway, at centre +/- offset
+  cards_height: 0.70
+  cards_yellow_spacing: 10.0
+  cards_blue_spacing: 15.0
