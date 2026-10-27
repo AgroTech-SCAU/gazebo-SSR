@@ -45,14 +45,15 @@ main                          # 介绍、索引、协作规范（不含模型资
 - Python：3.10
 - 关键依赖：`xacro`、`robot_state_publisher`、`joint_state_publisher_gui`、`rviz2`、
   `python3-numpy`、`python3-yaml`、`python3-pil`
-- MID-360 仿真（可选）：`ros2_livox_simulation`
+- MID-360 仿真（可选）：`ros2_livox_simulation`（不在 rosdep 索引中，需要单独安装）
 
 ### 安装依赖
 
 切换资源分支后，在仓库根目录执行：
 
 ```bash
-rosdep install --from-paths src --ignore-src -r -y
+rosdep install --from-paths src --ignore-src -r -y \
+  --skip-keys ros2_livox_simulation
 ```
 
 ## 4. 快速开始
@@ -99,6 +100,9 @@ ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py profile:=visual gu
 
 # 同时打开 RViz2
 ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py profile:=visual rviz:=true
+
+# 没有安装 ros2_livox_simulation 时，关闭车头 MID-360
+ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py gui:=false use_mid360:=false
 ```
 
 ![大棚中央通道](docs/images/greenhouse_aisle.png)
@@ -284,6 +288,16 @@ export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-11:$GAZEBO_RESOURCE_PATH
 - 控制器命令话题是 `/commands` 复数，不是 `/command`。
 - 检查控制器是否已加载：`ros2 control list_controllers`。
 - 检查 joint_states 是否在发布：`ros2 topic hz /joint_states`。
+
+### 没有安装 `ros2_livox_simulation`
+
+MID-360 插件和 `scan_mode/mid360.csv` 由该系统包提供，它不在 rosdep 索引里。
+不需要雷达时，启动时加 `use_mid360:=false`：
+
+```bash
+ros2 launch steer_wheel_control sim.launch.py use_mid360:=false
+ros2 launch pepper_greenhouse pepper_greenhouse_sim.launch.py use_mid360:=false
+```
 
 ### 没有 `/scan`，Nav2 怎么用
 
