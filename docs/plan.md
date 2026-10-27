@@ -11,8 +11,10 @@
 ## 已完成
 
 - [x] 建立 `main` 分支：仓库介绍、资源索引、环境与运行说明
-- [x] 建立 `sim/sweet-pepper-greenhouse` 分支：100×100 m 甜椒大棚场景 + 所依赖的 4WIS 底盘三包
+- [x] 建立 `sim/sweet-pepper-greenhouse` 分支：100×100 m 甜椒大棚场景包（独立，不依赖底盘）
 - [x] 建立 `sim/transfer-robot-chassis` 分支：4WIS 舵轮底盘模型、控制与里程计
+- [x] 大棚场景拆分：独立 `pepper_greenhouse_world.launch.py`，移除底盘依赖
+- [x] 文档说明大棚场景与 4WIS 底盘的组合方式（`world:=` / spawn / worktree）
 - [x] 纳入模板的 `.github` 协作文件、Issue / PR 模板与 `main` 保护规则
 - [x] 排除过程性文件：`build/`、`install/`、`log/`、`__pycache__`、原始实拍图、调试脚本
 
@@ -32,10 +34,10 @@
 
 目标：提高资源可用性与可验证性
 
-- [ ] 为 `pepper_greenhouse` 增加不依赖底盘的独立场景 launch
 - [ ] 为 4WIS 底盘提供 Nav2 参数模板与点云转 LaserScan 示例
 - [ ] 在 CI 或本地脚本中增加 `colcon build` / `colcon test` 检查
-- [ ] 补充大棚场景与底盘的组合使用示例
+- [ ] 为其它底盘（差速、阿克曼等）补充大棚场景组合示例
+- [ ] 提供 `pepper_greenhouse` 的 `wheel_y` 适配脚本或参数预设
 
 ### v1.0
 

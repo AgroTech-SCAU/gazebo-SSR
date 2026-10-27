@@ -4,33 +4,43 @@
 
 - 克隆 / 浏览 `main` 时不会被几十 MB 的网格和场景文件拖慢。
 - 每个资源可以独立检出、独立编译、独立发布。
-- 资源之间共享的包（例如 4WIS 底盘）由 Git 对象去重，不会因为出现在多个分支里而重复占用仓库体积。
+- 每个资源分支只放自己的包：大棚分支只有场景包，底盘分支只有底盘包。
+- 大棚场景包不依赖任何底盘，可以被其它底盘直接复用。
 
 ## 1. 分支清单
 
 | 分支 | 类型 | 内容 |
 | --- | --- | --- |
 | `main` | 默认 / 索引 | README、`docs/`、`.github/`、本地 Git 脚本 |
-| `sim/sweet-pepper-greenhouse` | 长期资源 | `pepper_greenhouse` + `steer_wheel_chassis` + `steer_wheel_control` + `steer_wheel_odometry` |
+| `sim/sweet-pepper-greenhouse` | 长期资源 | `pepper_greenhouse`（纯场景包，不依赖底盘） |
 | `sim/transfer-robot-chassis` | 长期资源 | `steer_wheel_chassis` + `steer_wheel_control` + `steer_wheel_odometry` |
 
 命名约定：资源分支统一使用 `sim/<resource>`，`<resource>` 用小写 kebab-case。
 功能开发 / 文档修改仍使用 `.github/CONTRIBUTING.md` 中的 `feat/`、`fix/`、`docs/` 等短期分支。
 
-### 为什么 `sim/sweet-pepper-greenhouse` 也包含底盘包
+### 大棚场景包为什么是独立的
 
-`pepper_greenhouse_sim.launch.py` 会 include `steer_wheel_control/sim.launch.py`，
-把大棚 world 交给底盘仿真启动。只放大棚包时该 launch 无法运行，所以资源分支把
-它依赖的三个底盘包一起带上，保证检出即可编译、启动。
+`pepper_greenhouse` 只包含 world、模型、相机和生成脚本，不依赖任何底盘。
+`pepper_greenhouse_world.launch.py` 只启动 Gazebo 和 world，不生成机器人，
+因此可以直接给其它底盘复用。
 
-如果只需要大棚场景本身，可以：
+单独看场景：
 
 ```bash
 git switch sim/sweet-pepper-greenhouse
-source /opt/ros/humble/setup.bash
-GAZEBO_MODEL_PATH=$PWD/src/pepper_greenhouse/models \
-  gazebo --verbose src/pepper_greenhouse/worlds/pepper_greenhouse.world
+colcon build --symlink-install --packages-select pepper_greenhouse
+source install/setup.bash
+ros2 launch pepper_greenhouse pepper_greenhouse_world.launch.py gui:=false
 ```
+
+与底盘组合（以 4WIS 为例，两个包需在同一个工作空间）：
+
+```bash
+ros2 launch steer_wheel_control sim.launch.py \
+  world:=$(ros2 pkg prefix pepper_greenhouse)/share/pepper_greenhouse/worlds/pepper_greenhouse.world
+```
+
+其它组合方式见 README 的“5.9 与任意底盘组合”。
 
 ## 2. 使用资源分支
 
@@ -76,22 +86,20 @@ source install/setup.bash
 资源代码直接在对应的资源分支上提交：
 
 ```bash
+# 大棚场景
 git switch sim/sweet-pepper-greenhouse
-
-# 修改 src/pepper_greenhouse/... 或底盘包
+# 修改 src/pepper_greenhouse/...
 git add -A
 git commit -m "feat(greenhouse): ..."
-```
 
-如果修改的是底盘包，记得同步到另一个资源分支：
-
-```bash
+# 底盘
 git switch sim/transfer-robot-chassis
-git cherry-pick <上面的 commit SHA>
+# 修改 src/steer_wheel_*...
+git add -A
+git commit -m "feat(chassis): ..."
 ```
 
-`sim/transfer-robot-chassis` 是 `sim/sweet-pepper-greenhouse` 的子集，也可以把底盘分支合并进大棚分支，
-但 cherry-pick 更不容易把无关历史带进来。
+两个分支没有共享包，不需要 cherry-pick。需要同时使用时，按第 6 节把包放进同一个工作空间。
 
 ## 4. 同步文档
 
@@ -138,23 +146,36 @@ git commit -m "feat(<resource>): add ..."
 
 ## 6. 组合多个资源
 
-一个工作空间只能检出一个分支。需要同时使用多个资源时，用另一个工作树或临时复制：
+一个工作空间只能检出一个分支。需要“大棚 + 底盘”时，用另一个工作树或临时复制：
 
 ```bash
-# 在仓库旁边再检出一个资源分支
+# 当前在 sim/sweet-pepper-greenhouse，把底盘分支检出到旁边
 git worktree add ../gazebo-SSR-chassis sim/transfer-robot-chassis
 
-# 复制需要的包到当前工作空间
+# 复制底盘三包到当前工作空间
 cp -a ../gazebo-SSR-chassis/src/steer_wheel_chassis src/
+cp -a ../gazebo-SSR-chassis/src/steer_wheel_control src/
+cp -a ../gazebo-SSR-chassis/src/steer_wheel_odometry src/
+
+colcon build --symlink-install
+source install/setup.bash
 ```
 
-使用完可以删除工作树：
+启动组合仿真：
+
+```bash
+ros2 launch steer_wheel_control sim.launch.py \
+  world:=$(ros2 pkg prefix pepper_greenhouse)/share/pepper_greenhouse/worlds/pepper_greenhouse.world
+```
+
+使用完可以删除工作树和临时复制的包：
 
 ```bash
 git worktree remove ../gazebo-SSR-chassis
+rm -rf src/steer_wheel_chassis src/steer_wheel_control src/steer_wheel_odometry
 ```
 
-> `sim/sweet-pepper-greenhouse` 已经包含底盘三包，通常不需要再组合。
+如果当前在底盘分支，反过来 worktree 大棚分支、把 `pepper_greenhouse` 复制进来即可。
 
 ## 7. 删除或归档资源
 
