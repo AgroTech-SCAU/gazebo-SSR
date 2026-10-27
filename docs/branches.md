@@ -11,13 +11,13 @@
 | 分支 | 类型 | 内容 |
 | --- | --- | --- |
 | `main` | 默认 / 索引 | README、`docs/`、`.github/`、本地 Git 脚本 |
-| `sim/greenhouse` | 长期资源 | `pepper_greenhouse` + `steer_wheel_chassis` + `steer_wheel_control` + `steer_wheel_odometry` |
-| `sim/steer-wheel-chassis` | 长期资源 | `steer_wheel_chassis` + `steer_wheel_control` + `steer_wheel_odometry` |
+| `sim/sweet-pepper-greenhouse` | 长期资源 | `pepper_greenhouse` + `steer_wheel_chassis` + `steer_wheel_control` + `steer_wheel_odometry` |
+| `sim/transfer-robot-chassis` | 长期资源 | `steer_wheel_chassis` + `steer_wheel_control` + `steer_wheel_odometry` |
 
 命名约定：资源分支统一使用 `sim/<resource>`，`<resource>` 用小写 kebab-case。
 功能开发 / 文档修改仍使用 `.github/CONTRIBUTING.md` 中的 `feat/`、`fix/`、`docs/` 等短期分支。
 
-### 为什么 `sim/greenhouse` 也包含底盘包
+### 为什么 `sim/sweet-pepper-greenhouse` 也包含底盘包
 
 `pepper_greenhouse_sim.launch.py` 会 include `steer_wheel_control/sim.launch.py`，
 把大棚 world 交给底盘仿真启动。只放大棚包时该 launch 无法运行，所以资源分支把
@@ -26,7 +26,7 @@
 如果只需要大棚场景本身，可以：
 
 ```bash
-git switch sim/greenhouse
+git switch sim/sweet-pepper-greenhouse
 source /opt/ros/humble/setup.bash
 GAZEBO_MODEL_PATH=$PWD/src/pepper_greenhouse/models \
   gazebo --verbose src/pepper_greenhouse/worlds/pepper_greenhouse.world
@@ -39,19 +39,19 @@ GAZEBO_MODEL_PATH=$PWD/src/pepper_greenhouse/models \
 ```bash
 git clone <仓库 URL> gazebo-SSR
 cd gazebo-SSR
-git switch sim/greenhouse
+git switch sim/sweet-pepper-greenhouse
 ```
 
 远端分支在本地不存在时，Git 通常会自动建立跟踪分支。若没有：
 
 ```bash
-git switch -c sim/greenhouse origin/sim/greenhouse
+git switch -c sim/sweet-pepper-greenhouse origin/sim/sweet-pepper-greenhouse
 ```
 
 ### 只拉取一个资源分支
 
 ```bash
-git clone --single-branch --branch sim/steer-wheel-chassis <仓库 URL> gazebo-SSR
+git clone --single-branch --branch sim/transfer-robot-chassis <仓库 URL> gazebo-SSR
 ```
 
 之后如果需要其他分支：
@@ -76,7 +76,7 @@ source install/setup.bash
 资源代码直接在对应的资源分支上提交：
 
 ```bash
-git switch sim/greenhouse
+git switch sim/sweet-pepper-greenhouse
 
 # 修改 src/pepper_greenhouse/... 或底盘包
 git add -A
@@ -86,11 +86,11 @@ git commit -m "feat(greenhouse): ..."
 如果修改的是底盘包，记得同步到另一个资源分支：
 
 ```bash
-git switch sim/steer-wheel-chassis
+git switch sim/transfer-robot-chassis
 git cherry-pick <上面的 commit SHA>
 ```
 
-`sim/steer-wheel-chassis` 是 `sim/greenhouse` 的子集，也可以把底盘分支合并进大棚分支，
+`sim/transfer-robot-chassis` 是 `sim/sweet-pepper-greenhouse` 的子集，也可以把底盘分支合并进大棚分支，
 但 cherry-pick 更不容易把无关历史带进来。
 
 ## 4. 同步文档
@@ -103,10 +103,10 @@ git switch main
 git add -A
 git commit -m "docs: ..."
 
-git switch sim/greenhouse
+git switch sim/sweet-pepper-greenhouse
 git merge main
 
-git switch sim/steer-wheel-chassis
+git switch sim/transfer-robot-chassis
 git merge main
 
 git switch main
@@ -142,7 +142,7 @@ git commit -m "feat(<resource>): add ..."
 
 ```bash
 # 在仓库旁边再检出一个资源分支
-git worktree add ../gazebo-SSR-chassis sim/steer-wheel-chassis
+git worktree add ../gazebo-SSR-chassis sim/transfer-robot-chassis
 
 # 复制需要的包到当前工作空间
 cp -a ../gazebo-SSR-chassis/src/steer_wheel_chassis src/
@@ -154,7 +154,7 @@ cp -a ../gazebo-SSR-chassis/src/steer_wheel_chassis src/
 git worktree remove ../gazebo-SSR-chassis
 ```
 
-> `sim/greenhouse` 已经包含底盘三包，通常不需要再组合。
+> `sim/sweet-pepper-greenhouse` 已经包含底盘三包，通常不需要再组合。
 
 ## 7. 删除或归档资源
 
