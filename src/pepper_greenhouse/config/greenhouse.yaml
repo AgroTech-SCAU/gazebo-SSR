@@ -1,12 +1,12 @@
 # Pepper greenhouse layout parameters.
 #
 # All lengths are metres.  The rail gauge (2 * chassis.wheel_y) is the
-# dimension anchor taken from the 4WIS chassis: every other dimension below
-# is either measured from the photos or derived from the rail gauge in
-# scripts/layout.py.
+# dimension anchor; the current values use the 4WIS reference chassis.
+# Every other dimension is measured from the photos or derived from the
+# rail gauge in scripts/layout.py.
 
 chassis:
-  wheel_y: 0.33470          # wheel centre |y| from steer_wheel_control.WHEEL_LAYOUT
+  wheel_y: 0.33470          # reference wheel centre |y|; change for other chassis
   wheel_width: 0.04490      # tyre width from the chassis URDF
   wheel_radius: 0.09350     # rolling radius from the chassis URDF
 
