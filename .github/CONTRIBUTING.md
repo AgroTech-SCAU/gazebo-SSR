@@ -105,6 +105,8 @@ test/can-parser
 
 机械臂、嵌入式等专业项目可继续使用已有的 `adapter/`、`behavior/`、`contract/`、`deploy/`、`sdk/`、`chip/` 等领域类型
 
+资源分支是长期分支，使用 `sim/<resource>`，规范见 README 的“新增资源”；上面的 `feat/`、`fix/` 等用于任务分支
+
 > 分支命名是团队协作约定，不在基础模板中通过 CI / Ruleset 硬性拦截；核心要求是：**不要直接在 `main` 开发，一个分支只解决一个清晰主题**
 
 如果不从 Issue 页面创建分支，也可以手动：
